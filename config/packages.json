@@ -1,0 +1,14 @@
+{
+  "basic": {
+    "price": 100000,
+    "hours": 100
+  },
+  "pro": {
+    "price": 250000,
+    "hours": 200
+  },
+  "pro_bonus": {
+    "price": 180000,
+    "hours": 200
+  }
+}

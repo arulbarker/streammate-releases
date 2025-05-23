@@ -1,0 +1,54 @@
+﻿# StreamMate AI Requirements - Fixed
+# Core Dependencies
+PyQt6
+PyQt6-Qt6
+PyQt6-sip
+
+# Audio/Speech Processing
+sounddevice
+soundfile
+SpeechRecognition
+pyaudio
+pydub
+
+# Google Cloud Services (untuk mode Pro)
+google-cloud-speech
+google-cloud-texttospeech
+google-auth
+google-auth-oauthlib
+
+# Text-to-Speech & Translation
+gtts
+transformers
+torch
+sentence-transformers
+
+# Live Streaming Integration
+pytchat
+TikTokLive
+websocket-client
+
+# API & Web
+requests
+beautifulsoup4
+midtransclient
+fastapi
+uvicorn
+
+# AI & NLP
+openai
+numpy
+scipy
+
+# Utils
+keyboard
+python-dotenv
+Pillow
+pyparsing
+
+
+# Tambahkan di requirements.txt
+ctranslate2>=3.15.0
+sentencepiece>=0.1.99
+transformers>=4.30.0
+huggingface_hub>=0.16.4
