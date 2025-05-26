@@ -208,7 +208,7 @@ class MainWindow(QMainWindow):
         
         # Load configuration
         self.cfg = ConfigManager("config/settings.json")
-        version = "v1.0.0"
+        version = "v1.0.1"v1.0.0"
         self.cfg.set("app_version", version)
         
         # License validator

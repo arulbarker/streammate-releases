@@ -31,7 +31,7 @@
   "user_data": {},
   "paket": "basic",
   "expired_at": "2025-06-07T17:40:40.507896",
-  "app_version": "v1.0.0",
+  "app_version": "v1.0.1",
   "animasi_hotkey": {
     "enabled": true,
     "start_tts": "F1",
