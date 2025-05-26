@@ -15,6 +15,20 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+# TAMBAHKAN KODE INI DI SINI (setelah baris import, sebelum definisi PACKAGES)
+# ========================================
+# Import debug manager
+try:
+    from modules_client.credit_debug_manager import CreditDebugManager
+    DEBUG_MANAGER = CreditDebugManager()
+    CREDIT_DEBUG_ENABLED = True
+    print("[DEBUG] Credit Debug Manager loaded successfully in payment_server")
+except ImportError as e:
+    DEBUG_MANAGER = None
+    CREDIT_DEBUG_ENABLED = False
+    print(f"[DEBUG] Credit Debug Manager not available in payment_server: {e}")
+# ========================================
+
 # Define packages with consistent structure: price and hours
 PACKAGES = {
     "basic": {"hours": 100, "price": 100000},
@@ -24,8 +38,29 @@ PACKAGES = {
 
 try:
     from modules_server.ipaymu_handler import IPaymuHandler
-    # Set sandbox mode based on environment variable
-    ipaymu_sandbox_mode = os.getenv("IPAYMU_SANDBOX_MODE", "false").lower() in ["true", "1", "yes"]
+    
+    # PERBAIKAN: Auto-detect development mode
+    is_development = (
+        os.getenv("STREAMMATE_DEV", "").lower() == "true" or
+        os.path.exists("config/dev_users.json") or
+        "localhost" in os.getenv("FLASK_RUN_HOST", "localhost")
+    )
+
+    # PERBAIKAN: Sandbox mode - paksa aktif untuk development
+    if is_development:
+        ipaymu_sandbox_mode = True
+        print("🧪 DEVELOPMENT MODE - Forcing iPaymu Sandbox")
+    else:
+        ipaymu_sandbox_mode = os.getenv("IPAYMU_SANDBOX_MODE", "false").lower() == "true"
+        print("🚀 PRODUCTION MODE - Using iPaymu Production")
+
+    print(f"📊 Mode Summary: Development={is_development}, Sandbox={ipaymu_sandbox_mode}")
+    
+    if is_development:
+        print("🧪 Development mode detected - Using iPaymu Sandbox")
+    else:
+        print("🚀 Production mode - Using iPaymu Production")
+    
     ipaymu = IPaymuHandler(sandbox=ipaymu_sandbox_mode)
 except ImportError as e:
     print(f"ALERT: Failed to import IPaymuHandler: {e}. Using DummyIPaymuHandler.")
@@ -498,6 +533,19 @@ def update_subscription_status(order_id, payment_status="success", transaction_i
             hours = 100 if package_name == "basic" else 200
             price = 100000 if package_name == "basic" else 250000
         
+        # TAMBAHAN: Debug logging sebelum update
+        if CREDIT_DEBUG_ENABLED and DEBUG_MANAGER:
+            payment_data = {
+                "order_id": order_id,
+                "payment_status": payment_status,
+                "transaction_id": transaction_id,
+                "package_name": package_name,
+                "hours": hours,
+                "price": price
+            }
+            DEBUG_MANAGER.log_payment_completion(payment_data)
+            print(f"[PAYMENT_DEBUG] Payment completion logged: {order_id}")
+
         # Update subscription status file
         filepath = Path("config/subscription_status.json")
         filepath.parent.mkdir(parents=True, exist_ok=True)
@@ -569,12 +617,43 @@ def update_subscription_status(order_id, payment_status="success", transaction_i
         # Save data
         with open(filepath, "w", encoding="utf-8") as f:
             json.dump(status_data, f, indent=2)
+
+        # TAMBAHAN: Debug logging SETELAH update berhasil
+        # ===============================================
+        if CREDIT_DEBUG_ENABLED and DEBUG_MANAGER:
+            DEBUG_MANAGER._log_debug("payment_update_complete", {
+                "order_id": order_id,
+                "email": email,
+                "package_name": package_name,
+                "hours_added": hours,
+                "total_hours_credit": total_hours,
+                "previous_hours": current_hours,
+                "status": status,
+                "update_successful": True,
+                "timestamp": now_str,
+                "file_path": str(filepath)
+            })
+            print(f"[PAYMENT_DEBUG] Credit update completed: {email} - {total_hours}h total")
+        # ===============================================
         
         print(f"Subscription updated: {email}, {package_name}, status={status}, hours={total_hours}")
         return True
     
     except Exception as e:
         print(f"Error updating subscription status: {e}")
+
+        # TAMBAHAN: Debug logging untuk error
+        # ==================================
+        if CREDIT_DEBUG_ENABLED and DEBUG_MANAGER:
+            DEBUG_MANAGER._log_debug("payment_update_error", {
+                "order_id": order_id,
+                "error": str(e),
+                "error_type": type(e).__name__,
+                "timestamp": datetime.now(timezone.utc).isoformat()
+            })
+            print(f"[PAYMENT_DEBUG] Payment update error logged: {e}")
+        # ==================================
+
         # PERBAIKAN: Log stack trace untuk debugging
         import traceback
         traceback.print_exc()

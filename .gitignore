@@ -1,38 +1,24 @@
-# StreamMate AI - Git Ignore 
- 
 # Credentials dan API Keys 
 config/google_token.json 
 config/google_oauth.json 
 config/gcloud_tts_credentials.json 
+config/settings.json 
+config/subscription_status.json 
 .env 
 *.key 
 *.pem 
  
-# Database 
+# Database dan Logs 
 *.db 
 *.sqlite 
- 
-# Logs 
 logs/ 
 *.log 
 temp/ 
 __pycache__/ 
  
-# Virtual Environment 
-venv/ 
-.venv/ 
-env/ 
- 
 # Build files 
 build/ 
 dist/ 
 *.spec 
- 
-# IDE 
-.vscode/ 
-.idea/ 
- 
-# Personal files 
-backup/ 
-BACKUP/ 
-test_* 
+venv/ 
+.venv/ 

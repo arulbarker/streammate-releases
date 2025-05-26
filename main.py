@@ -67,6 +67,43 @@ logger.info(f"Root directory: {ROOT}")
 logger.info(f"Platform: {sys.platform}")
 logger.info("=" * 60)
 
+# ========== AUTO-DETECT MODE ==========
+def detect_application_mode():
+    """Auto-detect apakah ini development atau production mode"""
+    
+    # 1. Environment variable
+    if os.getenv("STREAMMATE_DEV", "").lower() == "true":
+        print("🧪 MODE: Development (Environment Variable)")
+        return "development"
+    
+    # 2. Check dev_users.json
+    dev_users_file = Path("config/dev_users.json")
+    if dev_users_file.exists():
+        print("👨‍💻 MODE: Development (Dev Users File Found)")
+        return "development"
+    
+    # 3. Check if running from source dengan server.py
+    server_file = Path("modules_server/server.py")
+    if server_file.exists():
+        import socket
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        result = sock.connect_ex(('localhost', 8000))
+        sock.close()
+        if result == 0:
+            print("🔧 MODE: Development (Local Server Running)")
+            return "development"
+    
+    # 4. Default: Production
+    print("🚀 MODE: Production")
+    return "production"
+
+# Panggil detection
+APP_MODE = detect_application_mode()
+logger.info(f"Application mode: {APP_MODE}")
+
+# Export ke environment untuk module lain
+os.environ["STREAMMATE_APP_MODE"] = APP_MODE
+
 # ========== SETUP PYTHON PATH ==========
 # Add project paths to Python path SEBELUM import modules
 sys.path.insert(0, ROOT)

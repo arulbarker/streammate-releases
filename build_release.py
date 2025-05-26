@@ -26,6 +26,38 @@ def get_version():
     except:
         return "1.0.0"
 
+def should_exclude_file(file_path):
+    """Cek apakah file harus diexclude dari build"""
+    exclude_patterns = [
+        # Developer files
+        "config/dev_users.json",
+        "config/beta_users.json", 
+        "config/settings_dev_backup.json",
+        ".env.dev.backup",
+        
+        # Development scripts
+        "dev_mode.bat",
+        "dev.bat", 
+        "print_tree.py",
+        "monitor_credit_realtime.py",
+        "test_credit_system.py",
+        "reset_payment.py",
+        
+        # Server files
+        "modules_server/server.py",
+        "logger_server.py",
+        "run_server.py",
+        
+        # Log dan temp files
+        "logs/",
+        "temp/",
+        "__pycache__/",
+        ".pyc",
+        ".log"
+    ]
+    
+    return any(pattern in file_path for pattern in exclude_patterns)
+
 def clean_build():
     """Bersihkan direktori build sebelumnya"""
     print("🧹 Cleaning previous build...")
@@ -58,16 +90,17 @@ a = Analysis(
     pathex=['.'],
     binaries=[],
     datas=[
-        ('config', 'config'),
+        ('config', 'config', lambda x: not any(exclude in x for exclude in [
+            'dev_users.json', 'beta_users.json', 'settings_dev_backup.json'
+        ])),
         ('ui', 'ui'),
         ('modules_client', 'modules_client'),
-        ('modules_server', 'modules_server'),
+        ('modules_server', 'modules_server', lambda x: 'server.py' not in x),
         ('listeners', 'listeners'),
         ('thirdparty', 'thirdparty'),
         ('templates', 'templates'),
         ('version.txt', '.'),
         ('requirements.txt', '.'),
-        ('.env', '.'),
     ],
     hiddenimports=[
         'PyQt6',
@@ -183,12 +216,29 @@ def create_portable_structure():
         print(f"❌ Build directory not found: {dist_dir}")
         return False
     
-    # Copy semua file dari dist
+    # Copy semua file dari dist dengan filtering
     for item in dist_dir.iterdir():
+        # Skip file yang harus diexclude
+        if should_exclude_file(str(item)):
+            print(f"   Excluded: {item.name}")
+            continue
+            
         if item.is_file():
             shutil.copy2(item, portable_dir)
         else:
-            shutil.copytree(item, portable_dir / item.name, dirs_exist_ok=True)
+            # Copy directory dengan filtering
+            try:
+                shutil.copytree(
+                    item, 
+                    portable_dir / item.name, 
+                    dirs_exist_ok=True,
+                    ignore=lambda dir, files: [
+                        f for f in files 
+                        if should_exclude_file(os.path.join(dir, f))
+                    ]
+                )
+            except Exception as e:
+                print(f"   Warning: Could not copy {item.name}: {e}")
     
     # Copy file tambahan yang diperlukan
     additional_files = [
@@ -305,7 +355,9 @@ Section "Uninstall"
     DeleteRegKey HKLM "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\StreamMate AI"
 SectionEnd
 '''
-    
+
+
+
     nsis_file = f"{APP_NAME}_installer.nsi"
     with open(nsis_file, 'w') as f:
         f.write(nsis_script)
@@ -442,6 +494,27 @@ def main():
     if not portable_dir:
         print("❌ Failed to create portable structure!")
         return False
+    
+    # Step 4.5: Security check - SEKARANG portable_dir SUDAH ADA
+    print("🔒 Running security check...")
+    
+    security_violations = []
+    for root, dirs, files in os.walk(portable_dir):
+        for file in files:
+            file_path = os.path.join(root, file)
+            rel_path = os.path.relpath(file_path, portable_dir)
+            
+            if should_exclude_file(rel_path):
+                security_violations.append(rel_path)
+    
+    if security_violations:
+        print("❌ SECURITY VIOLATIONS FOUND:")
+        for violation in security_violations:
+            print(f"   - {violation}")
+        print("Build stopped for security reasons!")
+        return False
+    else:
+        print("✅ Security check passed - no sensitive files found")
     
     # Step 5: Create installer (optional)
     installer_file = create_installer()
