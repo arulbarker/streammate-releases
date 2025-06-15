@@ -1,0 +1,17 @@
+{
+  "latest_version": "1.0.3",
+  "minimum_version": "1.0.0",
+  "force_update": false,
+  "release_date": "2025-06-15",
+  "changelog": [
+    "Fitur baru: TikTok integration",
+    "Perbaikan bug notifikasi",
+    "Peningkatan performa"
+  ],
+  "download_info": {
+    "url": "https://github.com/arulbarker/streammate-releases/releases/download/v1.0.3/StreamMateAI_v1.0.3.zip",
+    "file_size": 164038464,
+    "checksum": "sha256:8824d2bb16d079207ac48cd482fa7f6e3a99b31bf4b005e4e0fc3477d35ec9bb"
+  },
+  "beta_versions": {}
+}
