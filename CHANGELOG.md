@@ -1,5 +1,12 @@
 # StreamMate AI Changelog
 
+## [v1.0.5] - 2025-06-16
+
+### ✨ New Features
+- perbaikan bug
+- Perbaikan UI pada halaman utama
+- Optimasi performa
+
 ## [v1.0.3] - 2025-06-15
 
 ### ✨ New Features
