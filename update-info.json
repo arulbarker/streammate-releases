@@ -1,17 +1,17 @@
 {
-  "latest_version": "1.0.5",
+  "latest_version": "1.0.8",
   "minimum_version": "1.0.0",
   "force_update": false,
-  "release_date": "2025-06-16",
+  "release_date": "2025-06-19",
   "changelog": [
-    "perbaikan bug",
+    "Penambahan fitur Trakteer Tab",
     "Perbaikan UI pada halaman utama",
     "Optimasi performa"
   ],
   "download_info": {
-    "url": "https://github.com/arulbarker/streammate-releases/releases/download/v1.0.5/StreamMateAI_v1.0.5.zip",
-    "file_size": 164044464,
-    "checksum": "sha256:799c889b7d4865bd5c84a5b01b7a0a132800a80010131756e420150bc58e05b6"
+    "url": "https://github.com/arulbarker/streammate-releases/releases/download/v1.0.8/StreamMateAI_v1.0.8.zip",
+    "file_size": 175328656,
+    "checksum": "sha256:defe5c9c7cd22290e20af8aa2c2a45edb42591e0cd35a9c252cf1424cc234f3a"
   },
   "beta_versions": {}
 }
