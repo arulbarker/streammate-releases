@@ -1,0 +1,10 @@
+{
+  "name": "StreamMateAI_Production.exe",
+  "version": "1.0.9",
+  "publisher": "StreamMate AI Technologies",
+  "description": "Live Stream Assistant for YouTube and TikTok",
+  "website": "https://github.com/arulbarker/streammate-releases",
+  "submission_notes": "Legitimate application for live streaming assistance. Self-signed certificate due to indie development.",
+  "file_hash_sha256": "674e1d322391ffe6fc0a92f154b2b511de33fe80355e29d5f13a11765205085c",
+  "file_size": 82614803
+}

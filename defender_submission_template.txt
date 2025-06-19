@@ -1,0 +1,28 @@
+
+Windows Defender False Positive Submission Template:
+
+Application Name: StreamMate AI
+Version: 1.0.9
+File Name: StreamMateAI_Production.exe
+File Hash (SHA256): 674e1d322391ffe6fc0a92f154b2b511de33fe80355e29d5f13a11765205085c
+Publisher: StreamMate AI Technologies
+Website: https://github.com/arulbarker/streammate-releases
+
+Description:
+StreamMate AI is a legitimate live streaming assistant application for YouTube and TikTok content creators. 
+It provides features like:
+- Speech-to-text transcription
+- AI-powered chat responses  
+- Text-to-speech functionality
+- Live chat monitoring
+
+The application is built with Python and PyInstaller, which may trigger heuristic detection.
+It uses self-signed certificate as it's an independent developer project.
+
+The application does NOT:
+- Access sensitive system files
+- Modify system settings without permission
+- Communicate with malicious servers
+- Contain any malware or viruses
+
+Please whitelist this application as it's a false positive detection.
