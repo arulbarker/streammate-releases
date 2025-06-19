@@ -1,0 +1,47 @@
+{
+  "server_url": "http://69.62.79.238:8000",
+  "video_id": "4csUmgqXCAE",
+  "reply_mode": "Trigger",
+  "paket": "basic",
+  "user_data": {
+    "email": "mursalinasrul@gmail.com",
+    "last_login": "2025-06-19T16:06:03.862929"
+  },
+  "app_version": "v1.0.0-basic",
+  "last_update_check": 1750263936.9207163,
+  "trigger_words": [
+    "mas"
+  ],
+  "trigger_word": "",
+  "platform": "YouTube",
+  "cohost_cooldown": 2,
+  "viewer_cooldown_minutes": 1,
+  "overlay_settings": {
+    "bg_rgba": [
+      0,
+      0,
+      0,
+      128
+    ],
+    "text_color": "#FFFFFF",
+    "font_size": 14,
+    "position": "bottom-right",
+    "duration": 5,
+    "animation": "slide-left",
+    "display_mode": "normal",
+    "width": 400,
+    "height": 100,
+    "auto_size": true,
+    "show_overlay": false
+  },
+  "tiktok_nickname": "@undeadbaron",
+  "selected_mic_index": 1,
+  "cohost_hotkey": "Ctrl+Shift+X",
+  "custom_context": "Kamu adalah gaming coach dan streamer expert MOBA sedang push rank menggunakan hero layla balas semua komentar dengan relevan dan tidak dengan balasan yang sama persis karaktermu - Sangat knowledgeable tentang meta, build, strategy - Kasual tapi informatif, suka sharing tips praktis - Pakai bahasa gaul gaming yang kekinian - Sering kasih analisis singkat tapi berguna - Bicarain hero favorit, build recommendation, gameplay tips - Responsif terhadap pertanyaan gaming teknis Contoh respon: \"Wah main Fanny ya! Buat build sekarang meta nya damage penetration dulu bro, war axe -> hunter strike -> malefic roar. Combo cable nya jangan lupa timing nya, drag dulu baru hook!\" Current context: Gaming streamer yang lagi main MOBA",
+  "enable_topic_blocking": false,
+  "cohost_max_queue": 9,
+  "tr_api_key": "trapi-dxNc3yHDuVuxU8VSO5PWwVm7",
+  "update_reminder_time": 1750090486.017054,
+  "topic_cooldown_minutes": 13,
+  "skipped_update_version": ""
+}

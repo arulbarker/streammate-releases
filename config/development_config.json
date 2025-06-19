@@ -1,0 +1,34 @@
+{
+    "environment": "development",
+    "server": {
+        "host": "localhost",
+        "port": 8001,
+        "debug": true,
+        "auto_reload": true
+    },
+    "database": {
+        "path": "data/license_data_dev.db",
+        "backup_enabled": true,
+        "backup_interval": 3600
+    },
+    "payment": {
+        "mode": "sandbox",
+        "ipaymu_sandbox": true,
+        "test_payments": true
+    },
+    "ai": {
+        "model": "deepseek-chat",
+        "debug_mode": true,
+        "test_responses": true
+    },
+    "security": {
+        "admin_key": "dev_admin_2025",
+        "cors_enabled": true,
+        "debug_endpoints": true
+    },
+    "features": {
+        "new_features_enabled": true,
+        "experimental_mode": true,
+        "beta_testing": true
+    }
+} 

@@ -1,0 +1,62 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+venv*/
+env/
+ENV/
+
+# Local development settings
+.env
+.venv
+.idea/
+.vscode/
+
+# Logs and databases
+logs/
+*.log
+*.db
+*.sqlite3
+billing_security.db
+license_data.db
+
+# Temporary files
+temp/
+.temp/
+*.tmp
+
+# Credentials and sensitive information
+*credentials*
+*secret*
+*api_key*
+*password*
+*token*
+backup_credentials/
+
+# User data
+data/
+knowledge/
+knowledge_bases/
+
+# Large binary files
+*.exe
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Cache files
+.cache/
+__pycache__/
+.pytest_cache/
+
+# System files
+.DS_Store
+Thumbs.db 

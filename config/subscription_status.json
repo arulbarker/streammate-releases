@@ -1,0 +1,15 @@
+{
+  "email": "mursalinasrul@gmail.com",
+  "status": "active",
+  "package": "basic",
+  "credit_balance": 103737.7,
+  "credit_used": 128.625,
+  "hours_credit": 103737.7,
+  "hours_used": 128.625,
+  "tier": "basic",
+  "is_valid": true,
+  "expire_date": null,
+  "synced_from_vps": true,
+  "vps_source_only": true,
+  "last_sync": "2025-06-19T09:37:58.871706+00:00"
+}

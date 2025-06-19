@@ -1,17 +1,25 @@
 {
-  "latest_version": "1.0.8",
+  "latest_version": "1.0.9",
   "minimum_version": "1.0.0",
   "force_update": false,
   "release_date": "2025-06-19",
   "changelog": [
-    "Penambahan fitur Trakteer Tab",
-    "Perbaikan UI pada halaman utama",
-    "Optimasi performa"
+    "Fixed SmartScreen warning",
+    "Fixed TikTok auto-reply",
+    "Fixed license display",
+    "Enhanced security",
+    "Performance improvements"
   ],
   "download_info": {
-    "url": "https://github.com/arulbarker/streammate-releases/releases/download/v1.0.8/StreamMateAI_v1.0.8.zip",
-    "file_size": 175328656,
-    "checksum": "sha256:defe5c9c7cd22290e20af8aa2c2a45edb42591e0cd35a9c252cf1424cc234f3a"
+    "url": "https://github.com/arulbarker/streammate-releases/releases/download/v1.0.9/StreamMateAI_v1.0.9_20250619.zip",
+    "file_size": 175349117,
+    "checksum": "sha256:44271638b0e73124aa887fb05ddf24062179a435189afa4edb63602df0864316"
   },
-  "beta_versions": {}
+  "beta_versions": {},
+  "critical_fixes": [
+    "SmartScreen certificate signing",
+    "License validation system",
+    "TikTok comment processing"
+  ],
+  "upgrade_notes": "Versi ini memperbaiki masalah kritis dengan SmartScreen dan validasi lisensi. Sangat direkomendasikan untuk upgrade."
 }

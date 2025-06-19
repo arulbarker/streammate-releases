@@ -1,0 +1,26 @@
+{
+    "basic": {
+      "price": 100000,
+      "credits": 100000,
+      "description": "Paket Basic - 100.000 Kredit",
+      "features": [
+        "Auto-Reply dengan AI",
+        "Voice to Text (STT)",
+        "Text to Speech (TTS)",
+        "100.000 kredit untuk fitur",
+        "Support 24/7"
+      ]
+    },
+    "pro": {
+      "price": 250000,
+      "credits": 250000,
+      "description": "Paket Pro - 250.000 Kredit",
+      "features": [
+        "Semua fitur Basic",
+        "250.000 kredit untuk fitur",
+        "AI Response lebih pintar",
+        "Priority Support",
+        "Custom Voice Training"
+      ]
+    }
+  }
